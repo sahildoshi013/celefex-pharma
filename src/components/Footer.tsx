@@ -1,5 +1,6 @@
 
 import { LinkedinIcon, TwitterIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -38,43 +39,57 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-display font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              {[
-                { name: "Home", href: "#home" },
-                { name: "Pipeline", href: "#pipeline" },
-                { name: "About", href: "#about" },
-                { name: "Team", href: "#team" },
-                { name: "Contact", href: "#contact" },
-              ].map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link to="/" className="text-gray-300 hover:text-white transition-colors text-sm">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/pipeline" className="text-gray-300 hover:text-white transition-colors text-sm">
+                  Pipeline
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-gray-300 hover:text-white transition-colors text-sm">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link to="/publications" className="text-gray-300 hover:text-white transition-colors text-sm">
+                  Team
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-sm">
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-lg font-display font-bold mb-4">Resources</h3>
             <ul className="space-y-2">
-              {[
-                { name: "Publications", href: "#publications" },
-                { name: "News", href: "#publications" },
-                { name: "Careers", href: "#contact" },
-                { name: "Privacy Policy", href: "#" },
-              ].map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link to="/publications" className="text-gray-300 hover:text-white transition-colors text-sm">
+                  Publications
+                </Link>
+              </li>
+              <li>
+                <Link to="/publications" className="text-gray-300 hover:text-white transition-colors text-sm">
+                  News
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-sm">
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
+                  Privacy Policy
+                </a>
+              </li>
             </ul>
           </div>
         </div>

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -25,14 +26,12 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "Pipeline", href: "/#pipeline" },
+    { name: "Pipeline", href: "/pipeline" },
     { name: "About", href: "/about" },
     { name: "Products", href: "/products" },
     { name: "Publications", href: "/publications" },
     { name: "Contact", href: "/contact" },
   ];
-
-  const isHashLink = (href: string) => href.startsWith("/#");
 
   return (
     <nav
@@ -52,27 +51,17 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (
-            isHashLink(item.href) ? (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-sm font-medium text-conical-navy hover:text-conical-purple transition-colors"
-              >
-                {item.name}
-              </a>
-            ) : (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`text-sm font-medium transition-colors ${
-                  location.pathname === item.href
-                    ? "text-conical-purple"
-                    : "text-conical-navy hover:text-conical-purple"
-                }`}
-              >
-                {item.name}
-              </Link>
-            )
+            <Link
+              key={item.name}
+              to={item.href}
+              className={`text-sm font-medium transition-colors ${
+                location.pathname === item.href
+                  ? "text-conical-purple"
+                  : "text-conical-navy hover:text-conical-purple"
+              }`}
+            >
+              {item.name}
+            </Link>
           ))}
         </div>
 
@@ -94,29 +83,18 @@ const Navbar = () => {
         <div className="md:hidden absolute top-full left-0 right-0 bg-white bg-opacity-95 backdrop-blur-sm shadow-md animate-fade-in">
           <div className="container mx-auto py-4 flex flex-col space-y-4">
             {navItems.map((item) => (
-              isHashLink(item.href) ? (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-base font-medium text-conical-navy hover:text-conical-blue px-4 py-2 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
-              ) : (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`text-base font-medium px-4 py-2 transition-colors ${
-                    location.pathname === item.href
-                      ? "text-conical-purple"
-                      : "text-conical-navy hover:text-conical-blue"
-                  }`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              )
+              <Link
+                key={item.name}
+                to={item.href}
+                className={`text-base font-medium px-4 py-2 transition-colors ${
+                  location.pathname === item.href
+                    ? "text-conical-purple"
+                    : "text-conical-navy hover:text-conical-blue"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
             ))}
           </div>
         </div>
