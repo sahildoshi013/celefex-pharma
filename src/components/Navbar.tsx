@@ -1,11 +1,12 @@
-
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,13 +24,15 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "Pipeline", href: "#pipeline" },
-    { name: "About", href: "#about" },
-    { name: "Team", href: "#team" },
-    { name: "Publications", href: "#publications" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "Pipeline", href: "/#pipeline" },
+    { name: "About", href: "/about" },
+    { name: "Products", href: "/products" },
+    { name: "Publications", href: "/publications" },
+    { name: "Contact", href: "/contact" },
   ];
+
+  const isHashLink = (href: string) => href.startsWith("/#");
 
   return (
     <nav
@@ -40,22 +43,36 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between">
-        <a href="#home" className="flex items-center">
+        <Link to="/" className="flex items-center">
           <span className="text-xl font-display font-bold text-conical-navy">
             Conical<span className="text-conical-blue">Pharmaceuticals</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="text-sm font-medium text-conical-navy hover:text-conical-purple transition-colors"
-            >
-              {item.name}
-            </a>
+            isHashLink(item.href) ? (
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-sm font-medium text-conical-navy hover:text-conical-purple transition-colors"
+              >
+                {item.name}
+              </a>
+            ) : (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={`text-sm font-medium transition-colors ${
+                  location.pathname === item.href
+                    ? "text-conical-purple"
+                    : "text-conical-navy hover:text-conical-purple"
+                }`}
+              >
+                {item.name}
+              </Link>
+            )
           ))}
         </div>
 
@@ -77,14 +94,29 @@ const Navbar = () => {
         <div className="md:hidden absolute top-full left-0 right-0 bg-white bg-opacity-95 backdrop-blur-sm shadow-md animate-fade-in">
           <div className="container mx-auto py-4 flex flex-col space-y-4">
             {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-base font-medium text-conical-navy hover:text-conical-blue px-4 py-2 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </a>
+              isHashLink(item.href) ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-base font-medium text-conical-navy hover:text-conical-blue px-4 py-2 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`text-base font-medium px-4 py-2 transition-colors ${
+                    location.pathname === item.href
+                      ? "text-conical-purple"
+                      : "text-conical-navy hover:text-conical-blue"
+                  }`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              )
             ))}
           </div>
         </div>
