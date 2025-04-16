@@ -86,9 +86,9 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="section-padding bg-white py-16">
+    <section id="contact" className="section-padding bg-gray-50 py-16">
       <div className="container mx-auto">
-        <div className="text-center mb-16 reveal">
+        <div className="text-center mb-16">
           <h2 className="text-3xl font-display font-bold text-conical-navy mb-4">
             Get in Touch
           </h2>
@@ -98,8 +98,8 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="reveal">
-            <div className="bg-gray-50 p-8 rounded-lg shadow-sm border border-gray-100 h-full">
+          <div>
+            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 h-full">
               <h3 className="text-xl font-display font-bold text-conical-navy mb-6">
                 Contact Information
               </h3>
@@ -129,9 +129,9 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="reveal">
+          <div>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-lg shadow-sm border border-gray-100">
                 <FormField
                   control={form.control}
                   name="name"
