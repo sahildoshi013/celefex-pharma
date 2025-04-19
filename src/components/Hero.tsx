@@ -1,11 +1,8 @@
 import React from "react";
-import { ArrowDownCircle, Download } from "lucide-react";
+import { ArrowDownCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
-  const navigate = useNavigate();
-
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -13,19 +10,6 @@ const Hero = () => {
         behavior: "smooth",
       });
     }
-  };
-
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/celefex-product-list.pdf';
-    link.download = 'celefex-product-list.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const handleExploreProducts = () => {
-    navigate('/products');
   };
 
   return (
@@ -40,18 +24,10 @@ const Hero = () => {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button
-            onClick={handleExploreProducts}
+            onClick={() => scrollToSection("about")}
             className="bg-conical-blue hover:bg-conical-blue/90"
           >
-            Explore Our Products
-          </Button>
-          <Button
-            onClick={handleDownload}
-            variant="outline"
-            className="border-conical-purple text-conical-purple hover:bg-conical-purple/10"
-          >
-            <Download className="mr-2" />
-            Download Product List
+            Learn More
           </Button>
         </div>
       </div>
@@ -60,7 +36,7 @@ const Hero = () => {
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => scrollToSection("products")}
+          onClick={() => scrollToSection("about")}
           aria-label="Scroll down"
         >
           <ArrowDownCircle className="text-conical-navy/60" />

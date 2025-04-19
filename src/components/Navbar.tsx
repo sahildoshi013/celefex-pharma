@@ -74,14 +74,10 @@ const Navbar = () => {
   const navItems = [
     { name: "Home", href: "/", onClick: handleHomeClick, section: "home" },
     { name: "About", href: "/#about", onClick: handleAboutClick, section: "about" },
-    { name: "Products", href: "/products", section: "products" },
     { name: "Contact", href: "/#contact", onClick: handleContactClick, section: "contact" },
   ];
 
   const isActiveLink = (item: typeof navItems[0]) => {
-    if (item.section === "products") {
-      return location.pathname === "/products";
-    }
     return item.section === activeSection;
   };
 

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -115,16 +114,6 @@ const Contact = () => {
                     </div>
                   </div>
                 ))}
-              </div>
-              
-              <div className="mt-10">
-                <h4 className="text-sm font-medium text-conical-navy mb-4">
-                  Career Opportunities
-                </h4>
-                <p className="text-conical-gray mb-3">
-                  Interested in joining our team? View our current openings or send your resume to:
-                </p>
-                <p className="text-conical-blue">careers@conicalpharmaceuticals.com</p>
               </div>
             </div>
           </div>
