@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -7,7 +8,9 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 const Index = () => {
-  // Scroll animation observer
+  const location = useLocation();
+
+  // Handle scroll animation
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -27,6 +30,19 @@ const Index = () => {
       revealElements.forEach((element) => observer.unobserve(element));
     };
   }, []);
+
+  // Handle hash-based navigation
+  useEffect(() => {
+    const hash = location.hash.slice(1); // Remove the # symbol
+    if (hash) {
+      const section = document.getElementById(hash);
+      if (section) {
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [location.hash]);
 
   return (
     <div className="min-h-screen">
