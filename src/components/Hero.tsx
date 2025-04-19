@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { ArrowDownCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import useEmblaCarousel from "embla-carousel-react";
 
 const Hero = () => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+  });
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -13,9 +18,54 @@ const Hero = () => {
     }
   };
 
+  // Auto-scroll the carousel
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const interval = setInterval(() => {
+      emblaApi.scrollNext();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [emblaApi]);
+
+  const carouselImages = [
+    {
+      src: "https://images.unsplash.com/photo-1563213126-a4273aed2016?q=80&w=2070&auto=format&fit=crop",
+      alt: "Pharmaceutical Manufacturing Facility"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1587370560942-ad2a04eabb6d?q=80&w=2070&auto=format&fit=crop",
+      alt: "Medicine Production Line"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?q=80&w=2070&auto=format&fit=crop",
+      alt: "Quality Control in Pharmaceutical Manufacturing"
+    }
+  ];
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-white via-blue-50/50 to-white pt-20 overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Carousel Background */}
+      <div className="absolute inset-0 z-0">
+        <div className="embla overflow-hidden h-full" ref={emblaRef}>
+          <div className="embla__container flex h-full">
+            {carouselImages.map((image, index) => (
+              <div key={index} className="embla__slide flex-[0_0_100%] min-w-0 relative">
+                <div className="absolute inset-0 bg-black/40" />
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -27,9 +77,9 @@ const Hero = () => {
               Celefex Pharma
             </span>
             <br />
-            <span className="text-conical-navy">for the Future</span>
+            <span className="text-white">for the Future</span>
           </h1>
-          <p className="text-lg md:text-xl text-conical-navy/80 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed">
             Developing novel therapies to address unmet needs in neurological and immunological disorders through Celefex Pharma's innovative approach.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
