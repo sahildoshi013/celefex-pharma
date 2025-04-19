@@ -24,7 +24,9 @@ export default defineConfig(({ mode }) => ({
     outDir: 'docs',
     assetsDir: 'assets',
     rollupOptions: {
-      input: path.resolve(__dirname, 'index.html'),
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+      },
       output: {
         assetFileNames: 'assets/[name]-[hash][extname]',
         chunkFileNames: 'assets/[name]-[hash].js',
