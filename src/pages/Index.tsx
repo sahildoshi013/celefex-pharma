@@ -6,6 +6,7 @@ import About from "@/components/About";
 import Products from "@/components/Products";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   const location = useLocation();
@@ -52,6 +53,7 @@ const Index = () => {
       <Products />
       <Contact />
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

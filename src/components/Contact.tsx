@@ -71,16 +71,19 @@ const Contact = () => {
       icon: <MapPin className="w-5 h-5 text-conical-blue" />,
       title: "Address",
       details: "123 Innovation Drive, Cambridge, MA 02139",
+      link: "https://maps.google.com/?q=123+Innovation+Drive,+Cambridge,+MA+02139",
     },
     {
       icon: <Mail className="w-5 h-5 text-conical-blue" />,
       title: "Email",
       details: "info@conicalpharmaceuticals.com",
+      link: "mailto:info@conicalpharmaceuticals.com",
     },
     {
       icon: <Phone className="w-5 h-5 text-conical-blue" />,
       title: "Phone",
       details: "+1 (617) 555-0123",
+      link: "tel:+16175550123",
     },
   ];
 
@@ -110,7 +113,14 @@ const Contact = () => {
                       <h4 className="text-sm font-medium text-conical-navy">
                         {item.title}
                       </h4>
-                      <p className="text-conical-gray">{item.details}</p>
+                      <a 
+                        href={item.link} 
+                        target={item.title === "Address" ? "_blank" : undefined}
+                        rel={item.title === "Address" ? "noopener noreferrer" : undefined}
+                        className="text-conical-gray hover:text-conical-blue transition-colors"
+                      >
+                        {item.details}
+                      </a>
                     </div>
                   </div>
                 ))}
