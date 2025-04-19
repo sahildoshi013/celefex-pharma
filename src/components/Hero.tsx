@@ -1,8 +1,12 @@
 
+import React from "react";
 import { ArrowDownCircle, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -13,13 +17,16 @@ const Hero = () => {
   };
 
   const handleDownload = () => {
-    // Note: You'll need to provide the actual PDF file URL here
     const link = document.createElement('a');
     link.href = '/product-list.pdf'; // Replace with your actual PDF file path
     link.download = 'celefex-product-list.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const handleExploreProducts = () => {
+    navigate('/products');
   };
 
   return (
@@ -34,7 +41,7 @@ const Hero = () => {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button
-            onClick={() => scrollToSection("products")}
+            onClick={handleExploreProducts}
             className="bg-conical-blue hover:bg-conical-blue/90"
           >
             Explore Our Products
@@ -67,3 +74,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
