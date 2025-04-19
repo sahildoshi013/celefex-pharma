@@ -5,6 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: mode === 'production' ? '/conical-clone-craft/' : '/',
   server: {
     host: "::",
     port: 8080,
@@ -18,5 +19,8 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  build: {
+    outDir: 'docs', // GitHub Pages uses the 'docs' folder by default
   },
 }));

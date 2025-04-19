@@ -1,5 +1,5 @@
-
 import { BadgeCheck, DnaIcon, MicroscopeIcon, PencilRuler, Users } from "lucide-react";
+import { motion } from "framer-motion";
 
 const About = () => {
   const approaches = [
@@ -29,24 +29,60 @@ const About = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <section id="about" className="section-padding bg-gray-50 py-16">
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-display font-bold text-conical-navy mb-4">
+    <section id="about" className="py-20 bg-gradient-to-b from-blue-50/30 to-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-conical-navy mb-6">
             Our Approach
           </h2>
-          <p className="text-conical-gray max-w-2xl mx-auto">
+          <p className="text-conical-gray/80 max-w-2xl mx-auto text-lg">
             At Conical Pharmaceuticals, we're dedicated to developing transformative therapies through our innovative approach to drug discovery and development.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
-          <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-            <h3 className="text-xl font-display font-bold text-conical-navy mb-4">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16"
+        >
+          <motion.div 
+            variants={itemVariants}
+            className="group bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 hover:border-conical-lightpurple/20"
+          >
+            <h3 className="text-2xl font-display font-bold text-conical-navy mb-4 group-hover:text-conical-purple transition-colors">
               Our Mission
             </h3>
-            <p className="text-conical-gray mb-6">
+            <p className="text-conical-gray/80 mb-6 leading-relaxed">
               We aim to transform patient outcomes by developing precision therapeutics that target the fundamental mechanisms of disease, particularly in areas of high unmet medical need.
             </p>
             <ul className="space-y-3">
@@ -57,13 +93,16 @@ const About = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-            <h3 className="text-xl font-display font-bold text-conical-navy mb-4">
+          <motion.div 
+            variants={itemVariants}
+            className="group bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 hover:border-conical-lightpurple/20"
+          >
+            <h3 className="text-2xl font-display font-bold text-conical-navy mb-4 group-hover:text-conical-purple transition-colors">
               Our Vision
             </h3>
-            <p className="text-conical-gray mb-6">
+            <p className="text-conical-gray/80 mb-6 leading-relaxed">
               We envision a future where neurological and immunological disorders can be treated effectively with precision therapeutics that target the underlying causes rather than just managing symptoms.
             </p>
             <ul className="space-y-3">
@@ -74,27 +113,34 @@ const About = () => {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
           {approaches.map((approach, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center"
+              variants={itemVariants}
+              className="group bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center hover:shadow-lg transition-all duration-300 hover:border-conical-lightpurple/20"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 mb-4 group-hover:bg-conical-lightpurple/10 transition-colors">
                 {approach.icon}
               </div>
-              <h3 className="text-lg font-display font-bold text-conical-navy mb-2">
+              <h3 className="text-xl font-display font-bold text-conical-navy mb-3 group-hover:text-conical-purple transition-colors">
                 {approach.title}
               </h3>
-              <p className="text-conical-gray text-sm">
+              <p className="text-conical-gray/80 text-sm leading-relaxed">
                 {approach.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

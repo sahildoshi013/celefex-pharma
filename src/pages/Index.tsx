@@ -3,9 +3,10 @@ import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Team from "@/components/Team";
+import Products from "@/components/Products";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   const location = useLocation();
@@ -49,9 +50,10 @@ const Index = () => {
       <Navbar />
       <Hero />
       <About />
-      <Team />
+      <Products />
       <Contact />
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

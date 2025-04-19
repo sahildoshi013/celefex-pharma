@@ -15,7 +15,7 @@ const AdminLoginPage = () => {
     // In a real application, this would be handled by a proper authentication system
     if (password === "admin123") {
       localStorage.setItem("adminAuth", "true");
-      navigate("/admin/products");
+      navigate("/");
     } else {
       setError("Invalid password");
     }

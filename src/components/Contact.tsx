@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +15,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { motion } from "framer-motion";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -42,11 +42,7 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      // Here you would typically send the form data to your backend API or email service
-      // For demo purposes, we'll simulate an API call with a timeout
       console.log("Form submitted with values:", values);
-      
-      // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       toast({
@@ -72,66 +68,106 @@ const Contact = () => {
       icon: <MapPin className="w-5 h-5 text-conical-blue" />,
       title: "Address",
       details: "123 Innovation Drive, Cambridge, MA 02139",
+      link: "https://maps.google.com/?q=123+Innovation+Drive,+Cambridge,+MA+02139",
     },
     {
       icon: <Mail className="w-5 h-5 text-conical-blue" />,
       title: "Email",
       details: "info@conicalpharmaceuticals.com",
+      link: "mailto:info@conicalpharmaceuticals.com",
     },
     {
       icon: <Phone className="w-5 h-5 text-conical-blue" />,
       title: "Phone",
       details: "+1 (617) 555-0123",
+      link: "tel:+16175550123",
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <section id="contact" className="section-padding bg-gray-50 py-16">
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-display font-bold text-conical-navy mb-4">
+    <section id="contact" className="py-20 bg-gradient-to-b from-white to-blue-50/30">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-conical-navy mb-6">
             Get in Touch
           </h2>
-          <p className="text-conical-gray max-w-2xl mx-auto">
+          <p className="text-conical-gray/80 max-w-2xl mx-auto text-lg">
             We're always looking for opportunities to collaborate and discuss our research. Reach out to learn more.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div>
-            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 h-full">
-              <h3 className="text-xl font-display font-bold text-conical-navy mb-6">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-12"
+        >
+          <motion.div variants={itemVariants}>
+            <div className="group bg-white p-8 rounded-xl shadow-sm border border-gray-100 h-full hover:shadow-lg transition-all duration-300 hover:border-conical-lightpurple/20">
+              <h3 className="text-2xl font-display font-bold text-conical-navy mb-6 group-hover:text-conical-purple transition-colors">
                 Contact Information
               </h3>
               <div className="space-y-6">
                 {contactInfo.map((item, index) => (
-                  <div key={index} className="flex items-start">
-                    <div className="mr-4 mt-1">{item.icon}</div>
+                  <motion.div 
+                    key={index} 
+                    className="flex items-start group/item"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="mr-4 mt-1 group-hover/item:text-conical-purple transition-colors">
+                      {item.icon}
+                    </div>
                     <div>
                       <h4 className="text-sm font-medium text-conical-navy">
                         {item.title}
                       </h4>
-                      <p className="text-conical-gray">{item.details}</p>
+                      <a 
+                        href={item.link} 
+                        target={item.title === "Address" ? "_blank" : undefined}
+                        rel={item.title === "Address" ? "noopener noreferrer" : undefined}
+                        className="text-conical-gray hover:text-conical-blue transition-colors"
+                      >
+                        {item.details}
+                      </a>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-              
-              <div className="mt-10">
-                <h4 className="text-sm font-medium text-conical-navy mb-4">
-                  Career Opportunities
-                </h4>
-                <p className="text-conical-gray mb-3">
-                  Interested in joining our team? View our current openings or send your resume to:
-                </p>
-                <p className="text-conical-blue">careers@conicalpharmaceuticals.com</p>
-              </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div variants={itemVariants}>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-xl shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-300 hover:border-conical-lightpurple/20">
                 <FormField
                   control={form.control}
                   name="name"
@@ -139,7 +175,11 @@ const Contact = () => {
                     <FormItem>
                       <FormLabel className="text-conical-navy">Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your name" {...field} />
+                        <Input 
+                          placeholder="Your name" 
+                          className="focus:border-conical-purple focus:ring-conical-purple" 
+                          {...field} 
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -152,7 +192,12 @@ const Contact = () => {
                     <FormItem>
                       <FormLabel className="text-conical-navy">Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your email address" type="email" {...field} />
+                        <Input 
+                          placeholder="Your email address" 
+                          type="email" 
+                          className="focus:border-conical-purple focus:ring-conical-purple" 
+                          {...field} 
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -165,7 +210,11 @@ const Contact = () => {
                     <FormItem>
                       <FormLabel className="text-conical-navy">Subject</FormLabel>
                       <FormControl>
-                        <Input placeholder="Message subject" {...field} />
+                        <Input 
+                          placeholder="Message subject" 
+                          className="focus:border-conical-purple focus:ring-conical-purple" 
+                          {...field} 
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -180,7 +229,7 @@ const Contact = () => {
                       <FormControl>
                         <Textarea 
                           placeholder="Your message" 
-                          className="min-h-[150px]" 
+                          className="min-h-[150px] focus:border-conical-purple focus:ring-conical-purple" 
                           {...field} 
                         />
                       </FormControl>
@@ -190,7 +239,7 @@ const Contact = () => {
                 />
                 <Button
                   type="submit"
-                  className="w-full bg-conical-blue hover:bg-conical-blue/90"
+                  className="w-full bg-conical-blue hover:bg-conical-blue/90 text-white px-6 py-3 rounded-full transition-all duration-300 hover:scale-105"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -204,8 +253,8 @@ const Contact = () => {
                 </Button>
               </form>
             </Form>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
