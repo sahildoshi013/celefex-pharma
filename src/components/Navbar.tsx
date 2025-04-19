@@ -42,10 +42,10 @@ const Navbar = () => {
   const handleAboutClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (location.pathname !== '/') {
-      navigate('/#about');
+      navigate('#about');
     } else {
       scrollToSection('about');
-      window.history.pushState(null, '', '/#about');
+      window.history.pushState(null, '', '#about');
       setActiveSection('about');
     }
   };
@@ -53,10 +53,10 @@ const Navbar = () => {
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (location.pathname !== '/') {
-      navigate('/#contact');
+      navigate('#contact');
     } else {
       scrollToSection('contact');
-      window.history.pushState(null, '', '/#contact');
+      window.history.pushState(null, '', '#contact');
       setActiveSection('contact');
     }
   };
@@ -64,10 +64,10 @@ const Navbar = () => {
   const handleHomeClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (location.pathname !== '/') {
-      navigate('/');
+      navigate('');
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      window.history.pushState(null, '', '/');
+      window.history.pushState(null, '', '');
       setActiveSection('home');
     }
   };
@@ -75,19 +75,19 @@ const Navbar = () => {
   const handleProductsClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (location.pathname !== '/') {
-      navigate('/#products');
+      navigate('#products');
     } else {
       scrollToSection('products');
-      window.history.pushState(null, '', '/#products');
+      window.history.pushState(null, '', '#products');
       setActiveSection('products');
     }
   };
 
   const navItems = [
-    { name: "Home", href: "/", onClick: handleHomeClick, section: "home" },
-    { name: "About", href: "/#about", onClick: handleAboutClick, section: "about" },
-    { name: "Products", href: "/#products", onClick: handleProductsClick, section: "products" },
-    { name: "Contact", href: "/#contact", onClick: handleContactClick, section: "contact" },
+    { name: "Home", href: "", onClick: handleHomeClick, section: "home" },
+    { name: "About", href: "#about", onClick: handleAboutClick, section: "about" },
+    { name: "Products", href: "#products", onClick: handleProductsClick, section: "products" },
+    { name: "Contact", href: "#contact", onClick: handleContactClick, section: "contact" },
   ];
 
   const isActiveLink = (item: typeof navItems[0]) => {

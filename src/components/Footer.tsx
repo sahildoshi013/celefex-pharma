@@ -8,17 +8,17 @@ const Footer = () => {
 
   const handleAboutClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate('/#about');
+    navigate('#about');
   };
 
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate('/#contact');
+    navigate('#contact');
   };
 
   const handleHomeClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate('/');
+    navigate('');
   };
 
   const containerVariants = {
@@ -63,7 +63,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <Link
-                  to="/"
+                  to=""
                   onClick={handleHomeClick}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
@@ -72,7 +72,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/#about"
+                  to="#about"
                   onClick={handleAboutClick}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
@@ -81,7 +81,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/#products"
+                  to="#products"
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   Products
@@ -89,7 +89,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/#contact"
+                  to="#contact"
                   onClick={handleContactClick}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
