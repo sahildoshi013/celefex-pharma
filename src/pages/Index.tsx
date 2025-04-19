@@ -38,10 +38,14 @@ const Index = () => {
     if (hash) {
       const section = document.getElementById(hash);
       if (section) {
+        // Add a small delay to ensure the page has loaded
         setTimeout(() => {
           section.scrollIntoView({ behavior: 'smooth' });
         }, 100);
       }
+    } else {
+      // If no hash, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [location.hash]);
 
