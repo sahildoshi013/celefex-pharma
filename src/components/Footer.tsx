@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="md:col-span-2">
             <div className="mb-4">
               <span className="text-2xl font-display font-bold">
-                Conical<span className="text-conical-lightblue">Pharmaceuticals</span>
+                Celefex<span className="text-conical-lightblue">Pharma</span>
               </span>
             </div>
             <p className="text-gray-300 mb-6 max-w-md">
@@ -79,7 +79,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400 text-sm">
-          <p>© {currentYear} Conical Pharmaceuticals. All rights reserved.</p>
+          <p>© {currentYear} Celefex Pharma. All rights reserved.</p>
         </div>
       </div>
     </footer>

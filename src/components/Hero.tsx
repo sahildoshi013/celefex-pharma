@@ -1,4 +1,3 @@
-
 import { ArrowDownCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -20,7 +19,7 @@ const Hero = () => {
           <br /> for the Future
         </h1>
         <p className="text-lg md:text-xl text-conical-navy/80 max-w-2xl mx-auto mb-10">
-          Developing novel therapies to address unmet needs in neurological and immunological disorders.
+          Developing novel therapies to address unmet needs in neurological and immunological disorders through Celefex Pharma's innovative approach.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button

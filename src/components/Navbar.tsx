@@ -42,7 +42,7 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between">
         <Link to="/" className="flex items-center">
           <span className="text-xl font-display font-bold text-conical-navy">
-            Conical<span className="text-conical-blue">Pharmaceuticals</span>
+            Celefex<span className="text-conical-blue">Pharma</span>
           </span>
         </Link>
 
