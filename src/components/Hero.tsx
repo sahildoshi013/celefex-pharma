@@ -24,10 +24,10 @@ const Hero = () => {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button
-            onClick={() => scrollToSection("about")}
+            onClick={() => scrollToSection("products")}
             className="bg-conical-blue hover:bg-conical-blue/90"
           >
-            Learn More
+            Explore Products
           </Button>
         </div>
       </div>
@@ -36,7 +36,7 @@ const Hero = () => {
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => scrollToSection("about")}
+          onClick={() => scrollToSection("products")}
           aria-label="Scroll down"
         >
           <ArrowDownCircle className="text-conical-navy/60" />

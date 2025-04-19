@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection, setActiveSection] = useState("home");
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -71,9 +71,21 @@ const Navbar = () => {
     }
   };
 
+  const handleProductsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/#products');
+    } else {
+      scrollToSection('products');
+      window.history.pushState(null, '', '/#products');
+      setActiveSection('products');
+    }
+  };
+
   const navItems = [
     { name: "Home", href: "/", onClick: handleHomeClick, section: "home" },
     { name: "About", href: "/#about", onClick: handleAboutClick, section: "about" },
+    { name: "Products", href: "/#products", onClick: handleProductsClick, section: "products" },
     { name: "Contact", href: "/#contact", onClick: handleContactClick, section: "contact" },
   ];
 
