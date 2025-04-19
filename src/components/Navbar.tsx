@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -24,11 +23,32 @@ const Navbar = () => {
     };
   }, []);
 
+  const handleAboutClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const navItems = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
+    { name: "Home", href: "/", onClick: handleHomeClick },
+    { name: "About", href: "/", onClick: handleAboutClick },
     { name: "Products", href: "/products" },
-    { name: "Contact", href: "/contact" },
+    { name: "Contact", href: "/", onClick: handleContactClick },
   ];
 
   return (
@@ -52,6 +72,7 @@ const Navbar = () => {
             <Link
               key={item.name}
               to={item.href}
+              onClick={item.onClick}
               className={`text-sm font-medium transition-colors ${
                 location.pathname === item.href
                   ? "text-conical-purple"
@@ -84,12 +105,17 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.href}
+                onClick={(e) => {
+                  if (item.onClick) {
+                    item.onClick(e);
+                  }
+                  setMobileMenuOpen(false);
+                }}
                 className={`text-base font-medium px-4 py-2 transition-colors ${
                   location.pathname === item.href
                     ? "text-conical-purple"
                     : "text-conical-navy hover:text-conical-blue"
                 }`}
-                onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
               </Link>
