@@ -4,6 +4,27 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const handleAboutClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer className="bg-conical-navy text-white py-16">
       <div className="container mx-auto px-4">
@@ -39,17 +60,17 @@ const Footer = () => {
             <h3 className="text-lg font-display font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-gray-300 hover:text-white transition-colors text-sm">
+                <Link to="/" onClick={handleHomeClick} className="text-gray-300 hover:text-white transition-colors text-sm">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-gray-300 hover:text-white transition-colors text-sm">
+                <Link to="/" onClick={handleAboutClick} className="text-gray-300 hover:text-white transition-colors text-sm">
                   About
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-sm">
+                <Link to="/" onClick={handleContactClick} className="text-gray-300 hover:text-white transition-colors text-sm">
                   Contact
                 </Link>
               </li>

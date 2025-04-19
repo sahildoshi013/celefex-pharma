@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ArrowDownCircle, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,7 +17,7 @@ const Hero = () => {
 
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '/product-list.pdf'; // Replace with your actual PDF file path
+    link.href = '/celefex-product-list.pdf';
     link.download = 'celefex-product-list.pdf';
     document.body.appendChild(link);
     link.click();

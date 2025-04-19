@@ -1,13 +1,14 @@
-
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,12 +25,65 @@ const Navbar = () => {
     };
   }, []);
 
+  // Update active section when hash changes
+  useEffect(() => {
+    const hash = location.hash.slice(1); // Remove the # symbol
+    setActiveSection(hash || (location.pathname === "/" ? "home" : location.pathname.slice(1)));
+  }, [location.hash, location.pathname]);
+
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleAboutClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/#about');
+    } else {
+      scrollToSection('about');
+      window.history.pushState(null, '', '/#about');
+      setActiveSection('about');
+    }
+  };
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/#contact');
+    } else {
+      scrollToSection('contact');
+      window.history.pushState(null, '', '/#contact');
+      setActiveSection('contact');
+    }
+  };
+
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.history.pushState(null, '', '/');
+      setActiveSection('home');
+    }
+  };
+
   const navItems = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Products", href: "/products" },
-    { name: "Contact", href: "/contact" },
+    { name: "Home", href: "/", onClick: handleHomeClick, section: "home" },
+    { name: "About", href: "/#about", onClick: handleAboutClick, section: "about" },
+    { name: "Products", href: "/products", section: "products" },
+    { name: "Contact", href: "/#contact", onClick: handleContactClick, section: "contact" },
   ];
+
+  const isActiveLink = (item: typeof navItems[0]) => {
+    if (item.section === "products") {
+      return location.pathname === "/products";
+    }
+    return item.section === activeSection;
+  };
 
   return (
     <nav
@@ -52,8 +106,9 @@ const Navbar = () => {
             <Link
               key={item.name}
               to={item.href}
+              onClick={item.onClick}
               className={`text-sm font-medium transition-colors ${
-                location.pathname === item.href
+                isActiveLink(item)
                   ? "text-conical-purple"
                   : "text-conical-navy hover:text-conical-purple"
               }`}
@@ -84,12 +139,17 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.href}
+                onClick={(e) => {
+                  if (item.onClick) {
+                    item.onClick(e);
+                  }
+                  setMobileMenuOpen(false);
+                }}
                 className={`text-base font-medium px-4 py-2 transition-colors ${
-                  location.pathname === item.href
+                  isActiveLink(item)
                     ? "text-conical-purple"
                     : "text-conical-navy hover:text-conical-blue"
                 }`}
-                onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
               </Link>
