@@ -21,6 +21,14 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    outDir: 'docs', // GitHub Pages uses the 'docs' folder by default
+    outDir: 'docs',
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js'
+      }
+    }
   },
 }));
