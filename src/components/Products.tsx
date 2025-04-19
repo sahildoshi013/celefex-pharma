@@ -1,5 +1,6 @@
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const Products = () => {
   const products = [
@@ -35,40 +36,74 @@ const Products = () => {
     document.body.removeChild(link);
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <section id="products" className="section-padding bg-gray-50 py-16">
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-display font-bold text-conical-navy mb-4">
+    <section id="products" className="py-20 bg-gradient-to-b from-white to-blue-50/30">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-conical-navy mb-6">
             Our Products
           </h2>
-          <p className="text-conical-gray max-w-2xl mx-auto">
+          <p className="text-conical-gray/80 max-w-2xl mx-auto text-lg">
             Discover our comprehensive range of pharmaceutical products and solutions designed to meet various healthcare needs.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
           {products.map((product, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-white p-8 rounded-lg shadow-sm border border-gray-100"
+              variants={itemVariants}
+              className="group bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 hover:border-conical-lightpurple/20"
             >
-              <h3 className="text-xl font-display font-bold text-conical-navy mb-4">
+              <h3 className="text-2xl font-display font-bold text-conical-navy mb-4 group-hover:text-conical-purple transition-colors">
                 {product.title}
               </h3>
-              <p className="text-conical-gray mb-6">
+              <p className="text-conical-gray/80 mb-6 leading-relaxed">
                 {product.description}
               </p>
               <Button
                 onClick={() => handleDownload(product.pdfUrl)}
-                className="bg-conical-blue hover:bg-conical-blue/90"
+                className="bg-conical-blue hover:bg-conical-blue/90 text-white px-6 py-3 rounded-full transition-all duration-300 hover:scale-105"
               >
                 <Download className="w-4 h-4 mr-2" />
                 Download Product List
               </Button>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
