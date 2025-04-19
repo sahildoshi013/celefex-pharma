@@ -1,28 +1,33 @@
-import { Download } from "lucide-react";
+import { Download, Pill, Syringe, Scissors, FlaskConical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Products = () => {
   const products = [
     {
       title: "Human Medicine",
       description: "Our comprehensive range of human medicines includes innovative treatments for various medical conditions. From chronic diseases to acute care, we provide high-quality pharmaceutical solutions that meet international standards.",
-      pdfUrl: "/products/human-medicine.pdf"
+      pdfUrl: "/products/human-medicine.pdf",
+      icon: <Pill className="w-8 h-8 text-conical-blue" />
     },
     {
       title: "Cattle Medicine",
       description: "Specialized veterinary medicines for cattle health and productivity. Our products support animal welfare and help maintain healthy livestock through preventive and therapeutic solutions.",
-      pdfUrl: "/products/cattle-medicine.pdf"
+      pdfUrl: "/products/cattle-medicine.pdf",
+      icon: <Syringe className="w-8 h-8 text-conical-purple" />
     },
     {
       title: "Surgical Instruments",
       description: "High-precision surgical instruments designed for medical professionals. Our range includes essential tools for various surgical procedures, ensuring reliability and performance in critical medical situations.",
-      pdfUrl: "/products/surgical-instruments.pdf"
+      pdfUrl: "/products/surgical-instruments.pdf",
+      icon: <Scissors className="w-8 h-8 text-conical-lightblue" />
     },
     {
       title: "API Products",
       description: "Active Pharmaceutical Ingredients (APIs) manufactured to the highest quality standards. Our API products serve as the foundation for various pharmaceutical formulations, ensuring efficacy and safety.",
-      pdfUrl: "/products/api-products.pdf"
+      pdfUrl: "/products/api-products.pdf",
+      icon: <FlaskConical className="w-8 h-8 text-conical-purple" />
     }
   ];
 
@@ -86,21 +91,30 @@ const Products = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="group bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 hover:border-conical-lightpurple/20"
+              className="group"
             >
-              <h3 className="text-2xl font-display font-bold text-conical-navy mb-4 group-hover:text-conical-purple transition-colors">
-                {product.title}
-              </h3>
-              <p className="text-conical-gray/80 mb-6 leading-relaxed">
-                {product.description}
-              </p>
-              <Button
-                onClick={() => handleDownload(product.pdfUrl)}
-                className="bg-conical-blue hover:bg-conical-blue/90 text-white px-6 py-3 rounded-full transition-all duration-300 hover:scale-105"
-              >
-                <Download className="w-4 h-4 mr-2" />
-                Download Product List
-              </Button>
+              <Card className="h-full border-0 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-conical-lightpurple/20">
+                <CardHeader className="flex flex-row items-center gap-4">
+                  <div className="p-3 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors">
+                    {product.icon}
+                  </div>
+                  <CardTitle className="text-2xl font-display font-bold text-conical-navy group-hover:text-conical-purple transition-colors">
+                    {product.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-conical-gray/80 mb-6 leading-relaxed">
+                    {product.description}
+                  </CardDescription>
+                  <Button
+                    onClick={() => handleDownload(product.pdfUrl)}
+                    className="bg-conical-blue hover:bg-conical-blue/90 text-white px-6 py-3 rounded-full transition-all duration-300 hover:scale-105"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Download Product List
+                  </Button>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
         </motion.div>
