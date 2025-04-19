@@ -1,3 +1,4 @@
+
 import { ArrowDownCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -23,17 +24,17 @@ const Hero = () => {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button
-            onClick={() => scrollToSection("pipeline")}
+            onClick={() => scrollToSection("about")}
             className="bg-conical-blue hover:bg-conical-blue/90"
           >
-            Explore Our Pipeline
+            Learn About Our Approach
           </Button>
           <Button
-            onClick={() => scrollToSection("about")}
+            onClick={() => scrollToSection("contact")}
             variant="outline"
             className="border-conical-purple text-conical-purple hover:bg-conical-purple/10"
           >
-            About Our Approach
+            Contact Us
           </Button>
         </div>
       </div>
@@ -42,7 +43,7 @@ const Hero = () => {
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => scrollToSection("pipeline")}
+          onClick={() => scrollToSection("about")}
           aria-label="Scroll down"
         >
           <ArrowDownCircle className="text-conical-navy/60" />
