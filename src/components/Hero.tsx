@@ -1,5 +1,5 @@
 
-import { ArrowDownCircle } from "lucide-react";
+import { ArrowDownCircle, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
@@ -12,11 +12,21 @@ const Hero = () => {
     }
   };
 
+  const handleDownload = () => {
+    // Note: You'll need to provide the actual PDF file URL here
+    const link = document.createElement('a');
+    link.href = '/product-list.pdf'; // Replace with your actual PDF file path
+    link.download = 'celefex-product-list.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-blue-50 pt-20">
       <div className="container mx-auto section-padding text-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-          <span className="text-gradient">Precision Therapeutics</span>
+          <span className="text-gradient">Celefex Pharma</span>
           <br /> for the Future
         </h1>
         <p className="text-lg md:text-xl text-conical-navy/80 max-w-2xl mx-auto mb-10">
@@ -24,17 +34,18 @@ const Hero = () => {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button
-            onClick={() => scrollToSection("about")}
+            onClick={() => scrollToSection("products")}
             className="bg-conical-blue hover:bg-conical-blue/90"
           >
-            Learn About Our Approach
+            Explore Our Products
           </Button>
           <Button
-            onClick={() => scrollToSection("contact")}
+            onClick={handleDownload}
             variant="outline"
             className="border-conical-purple text-conical-purple hover:bg-conical-purple/10"
           >
-            Contact Us
+            <Download className="mr-2" />
+            Download Product List
           </Button>
         </div>
       </div>
@@ -43,7 +54,7 @@ const Hero = () => {
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => scrollToSection("about")}
+          onClick={() => scrollToSection("products")}
           aria-label="Scroll down"
         >
           <ArrowDownCircle className="text-conical-navy/60" />
