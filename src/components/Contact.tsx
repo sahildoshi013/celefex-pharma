@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Mail, Phone, Loader2 } from "lucide-react";
+import { MapPin, Mail, Phone, MessageCircle } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { 
   Form,
@@ -42,20 +42,26 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      console.log("Form submitted with values:", values);
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const formattedMessage = `*New Contact Form Submission*%0A
+Name: ${values.name}%0A
+Email: ${values.email}%0A
+Subject: ${values.subject}%0A
+Message: ${values.message}`;
+
+      const whatsappUrl = `https://wa.me/918000074479?text=${formattedMessage}`;
+      window.open(whatsappUrl, '_blank');
       
       toast({
-        title: "Message Sent",
-        description: "Thank you for your message. We'll get back to you soon!",
+        title: "Opening WhatsApp",
+        description: "Redirecting you to WhatsApp to send your message.",
       });
       
       form.reset();
     } catch (error) {
-      console.error("Error sending message:", error);
+      console.error("Error:", error);
       toast({
         title: "Error",
-        description: "Failed to send your message. Please try again later.",
+        description: "Failed to open WhatsApp. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -244,11 +250,14 @@ const Contact = () => {
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Sending...
+                      <MessageCircle className="mr-2 h-4 w-4 animate-spin" />
+                      Opening WhatsApp...
                     </>
                   ) : (
-                    "Send Message"
+                    <>
+                      <MessageCircle className="mr-2 h-4 w-4" />
+                      Send Message via WhatsApp
+                    </>
                   )}
                 </Button>
               </form>
